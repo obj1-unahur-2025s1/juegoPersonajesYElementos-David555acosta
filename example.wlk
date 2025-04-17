@@ -13,6 +13,7 @@ nace con 10 flechas. Cada vez que se usa, pierde una flecha. Está cargada si ti
 object ballesta {
   var cantidad = 10
   const potencia = 4
+  method potencia() = potencia 
   method disparar() {cantidad += -1}
 
   method estaCargada() {
@@ -31,6 +32,7 @@ object jabalina {
   method estaCargada() = estaCargada
   method disparar() {estaCargada = false}
   const potencia = 30
+  method potencia() = potencia 
   method tipo() = arma 
 }
 
@@ -52,7 +54,11 @@ object floki {
     return estado
   }
   
-  method encontrarElemento(armaX) {}
+  method encontrarElemento(armaX , personaje) {
+    if(self.fueUsada(armaX)) {
+      personaje.reaccionAtaque(armaX , personaje)
+    }
+  }
 }
 
 object mario {
@@ -66,8 +72,12 @@ object castillo {
   method altura() = 20
   method rol() = vaca
 
-  method reaccionAtaque() {
-    
+  method reaccionAtaque(arma , personaje){
+    if(personaje == floki) {
+      defensa = defensa - arma.potencia()
+    } else {
+      
+    }
   }
 }
 
@@ -76,10 +86,14 @@ object aurora {
   method estaViva(estado) {estaViva = estado} 
   method altura() = 1
   method rol() = vaca 
+
+  method reaccionAtaque(potenciaArma , personaje) {}
 }
 
 object tipa {
   var altura = 8
   method rol() = arbol
-  method altura(alturaX) {altura = alturaX} 
+  method altura(alturaX) {altura = alturaX}
+
+  method reaccionAtaque(potenciaArma , personaje) {}
 }
